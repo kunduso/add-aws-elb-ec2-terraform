@@ -37,6 +37,7 @@ resource "aws_instance" "app-server1" {
   ami                    = data.aws_ami.amazon_ami.id
   vpc_security_group_ids = [aws_security_group.http-sg.id]
   subnet_id              = aws_subnet.private-2a.id
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address
   associate_public_ip_address = true
     tags = {
       Name = "app-server-1"
