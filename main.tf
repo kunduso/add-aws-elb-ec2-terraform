@@ -25,7 +25,7 @@ resource "aws_subnet" "private-2b" {
     "Name" = "Application-1-private-2b"
   }
 }
-resource "aws_subnet" "private-2b" {
+resource "aws_subnet" "private-2c" {
   vpc_id            = aws_vpc.this.id
   cidr_block        = "10.20.20.32/28"
   availability_zone = "us-east-2c"
