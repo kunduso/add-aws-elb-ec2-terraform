@@ -1,6 +1,9 @@
-output "instance_app-server1_ip_addr" {
-  value = aws_instance.app-server1.public_ip
+output "instance_app-server1_public_dns" {
+  value = aws_instance.app-server1.public_dns
 }
-output "instance_app-server2_ip_addr" {
-  value = aws_instance.app-server2.public_ip
+output "instance_app-server2_public_dns" {
+  value = aws_instance.app-server2.public_dns
+}
+output "instance_app-server3_public_dns" {
+  value = aws_instance.app-server3.public_dns
 }
