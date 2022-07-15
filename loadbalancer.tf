@@ -33,3 +33,27 @@ resource "aws_lb_target_group_attachment" "attach-app3" {
   target_id        = aws_instance.app-server3.id
   port             = 80
 }
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.front.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.front.arn
+  }
+}
+
+resource "aws_lb" "front" {
+  name               = "front"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.http-sg.id]
+  subnets            = [aws_subnet.private-2a.id, aws_subnet.private-2b.id, aws_subnet.private-2c.id]
+
+  enable_deletion_protection = true
+
+  tags = {
+    Environment = "front"
+  }
+}
