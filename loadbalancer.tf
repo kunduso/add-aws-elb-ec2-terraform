@@ -1,5 +1,5 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
-resource "aws_lb_target_group" "this" {
+resource "aws_lb_target_group" "front" {
   name     = "application-front"
   port     = 80
   protocol = "HTTP"
@@ -19,17 +19,17 @@ resource "aws_lb_target_group" "this" {
 }
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
 resource "aws_lb_target_group_attachment" "attach-app1" {
-  target_group_arn = aws_lb_target_group.this.arn
+  target_group_arn = aws_lb_target_group.front.arn
   target_id        = aws_instance.app-server1.id
   port             = 80
 }
 resource "aws_lb_target_group_attachment" "attach-app2" {
-  target_group_arn = aws_lb_target_group.this.arn
+  target_group_arn = aws_lb_target_group.front.arn
   target_id        = aws_instance.app-server2.id
   port             = 80
 }
 resource "aws_lb_target_group_attachment" "attach-app3" {
-  target_group_arn = aws_lb_target_group.this.arn
+  target_group_arn = aws_lb_target_group.front.arn
   target_id        = aws_instance.app-server3.id
   port             = 80
 }
