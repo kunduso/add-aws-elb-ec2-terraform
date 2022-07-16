@@ -33,6 +33,7 @@ resource "aws_lb_target_group_attachment" "attach-app3" {
   target_id        = aws_instance.app-server3.id
   port             = 80
 }
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.front.arn
   port              = "80"
@@ -43,7 +44,7 @@ resource "aws_lb_listener" "front_end" {
     target_group_arn = aws_lb_target_group.front.arn
   }
 }
-
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 resource "aws_lb" "front" {
   name               = "front"
   internal           = false
