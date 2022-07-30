@@ -14,7 +14,6 @@ resource "aws_lb_target_group" "front" {
     protocol = "HTTP"
     timeout = 3
     unhealthy_threshold = 2
-
   }
 }
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment

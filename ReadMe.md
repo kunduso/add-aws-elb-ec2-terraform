@@ -1,10 +1,10 @@
-![Image](https://skdevops.files.wordpress.com/2022/07/64.image-1.png)
+![Image](https://skdevops.files.wordpress.com/2022/07/65.image-1.png)
 ## Motivation
-My objectives was to use Terraform to create a bare-bone web server on AWS EC2. I discuss from creating the VPC, subnets, internet gateway, security group, and EC2 instances to finally automating the process via Terraform and user data.
+My objectives was to create an application load balancer and attach that to three EC2 instances hosted in three different availability zones in a region using Terraform.
 
-I discussed the concept in detail in my notes at -[Create a web-server on AWS EC2 instance using Terraform and user data.](https://skundunotes.com/2022/07/11/create-a-web-server-on-aws-ec2-instance-using-terraform-and-user-data/)
+I discussed the concept in detail in my notes at -[Add an application load balancer to AWS EC2 using Terraform.](http://skundunotes.com/2022/07/30/add-an-application-load-balancer-to-aws-ec2-using-terraform/)
 
-*Note: I did not include the concepts of load balancing, installing a certificate, or route53 in this note.*
+*Note: I did not include the concepts of creating the EC2 instances, or installing a certificate, or route53 in this note.*
 
 ## Prerequisites
 I installed `terraform` before I worked on this repository. Installation information is available in the [install guide.](https://www.terraform.io/downloads.html) <br />I used the `access_key` and the `secret_key` of an IAM user that had permission to create all the resources managed via this `terraform` code.
