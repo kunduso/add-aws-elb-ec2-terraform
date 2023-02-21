@@ -46,7 +46,7 @@ name: 'Terraform'
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "add-elb" ]
   pull_request:
 
 permissions:
