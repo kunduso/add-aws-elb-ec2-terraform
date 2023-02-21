@@ -5,14 +5,14 @@ resource "aws_lb_target_group" "front" {
   protocol = "HTTP"
   vpc_id   = aws_vpc.this.id
   health_check {
-    enabled = true
-    healthy_threshold = 3
-    interval = 10
-    matcher = 200
-    path = "/"
-    port = "traffic-port"
-    protocol = "HTTP"
-    timeout = 3
+    enabled             = true
+    healthy_threshold   = 3
+    interval            = 10
+    matcher             = 200
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = 3
     unhealthy_threshold = 2
   }
 }
