@@ -29,7 +29,7 @@ jobs:
     - name: Configure AWS Credentials Action For GitHub Actions
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
-        role-to-assume: arn:aws:iam::743794601996:role/GitHub-OpenID
+        role-to-assume: ${{ secrets.IAM_ROLE }}
         role-session-name: AWSSession
         aws-region: us-east-2
 
