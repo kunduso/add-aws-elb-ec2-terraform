@@ -7,11 +7,12 @@ on:
   workflow_dispatch:
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'continuous-integration'
     runs-on: ubuntu-latest
     environment: production
 
@@ -30,6 +31,8 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # role-to-assume: 
+        # role-session-name:
         aws-region: us-east-2
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
