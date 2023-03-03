@@ -1,4 +1,4 @@
-name: checkov
+name: checkov-static-analysis-scan
 
 # Controls when the workflow will run
 on:
