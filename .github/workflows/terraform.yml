@@ -3,7 +3,7 @@ name: terraform-infra-provisioning
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "add-elb" ]
+    branches: [ "main", "add-elb", "add-eip" ]
   pull_request:
 
 
