@@ -10,7 +10,7 @@ resource "aws_vpc" "this" {
   }
 }
 resource "aws_subnet" "private" {
-  count = length(var.subnet_cidr_private)
+  count             = length(var.subnet_cidr_private)
   vpc_id            = aws_vpc.this.id
   cidr_block        = var.subnet_cidr_private[count.index]
   availability_zone = var.availability_zone[count.index]
@@ -49,7 +49,7 @@ resource "aws_route_table" "this-rt" {
   }
 }
 resource "aws_route_table_association" "private" {
-  count = length(var.subnet_cidr_private)
+  count          = length(var.subnet_cidr_private)
   subnet_id      = element(aws_subnet.*.id, count.index)
   route_table_id = aws_route_table.this-rt.id
 }
