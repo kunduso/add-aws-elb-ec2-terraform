@@ -32,18 +32,19 @@ data "aws_ami" "amazon_ami" {
   most_recent = true
   owners      = ["amazon"]
 }
-# resource "aws_instance" "app-server1" {
-#   instance_type          = "t2.micro"
-#   ami                    = data.aws_ami.amazon_ami.id
-#   vpc_security_group_ids = [aws_security_group.http-sg.id]
-#   subnet_id              = aws_subnet.private-2a.id
-#   # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address
-#   associate_public_ip_address = true
-#   tags = {
-#     Name = "app-server-1"
-#   }
-#   user_data = file("user_data/user_data.tpl")
-# }
+resource "aws_instance" "app-server1" {
+    count = length(var.subnet_cidr_private)
+  instance_type          = "t2.micro"
+  ami                    = data.aws_ami.amazon_ami.id
+  vpc_security_group_ids = [aws_security_group.http-sg.id]
+  subnet_id              = element(aws_subnet.private.*.id, count.index)
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address
+  associate_public_ip_address = true
+  tags = {
+    Name = "app-server-"+[count.index]
+  }
+  user_data = file("user_data/user_data.tpl")
+}
 # resource "aws_instance" "app-server2" {
 #   instance_type               = "t2.micro"
 #   ami                         = data.aws_ami.amazon_ami.id
