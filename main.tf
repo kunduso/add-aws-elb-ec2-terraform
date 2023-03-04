@@ -50,7 +50,7 @@ resource "aws_route_table" "this-rt" {
 }
 resource "aws_route_table_association" "private" {
   count          = length(var.subnet_cidr_private)
-  subnet_id      = element(aws_subnet.*.id, count.index)
+  subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = aws_route_table.this-rt.id
 }
 # resource "aws_route_table_association" "private-2b" {
