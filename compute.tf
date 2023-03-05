@@ -32,7 +32,7 @@ data "aws_ami" "amazon_ami" {
   most_recent = true
   owners      = ["amazon"]
 }
-resource "aws_instance" "app-server1" {
+resource "aws_instance" "app-server" {
   count                  = length(var.subnet_cidr_private)
   instance_type          = "t2.micro"
   ami                    = data.aws_ami.amazon_ami.id
