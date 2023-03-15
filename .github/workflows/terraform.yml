@@ -3,13 +3,11 @@ name: terraform-infra-provisioning
 on:
   workflow_dispatch:
   push:
-    branches: [ * ]
+    branches: [ '*' ]
   pull_request:
     branches: ["main"]
 
-permissions:
-  id-token: write
-  contents: read
+permissions: read-all
 
 jobs:
   terraform:
