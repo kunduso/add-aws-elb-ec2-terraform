@@ -1,4 +1,5 @@
-[![terraform-infra-provisioning](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml/badge.svg)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml)[![checkov-static-analysis-scan](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml/badge.svg?branch=main)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml)
+[![terraform-infra-provisioning](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml/badge.svg)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml) 
+[![checkov-static-analysis-scan](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml/badge.svg?branch=main)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml)
 ![Image](https://skdevops.files.wordpress.com/2023/03/72-image-1.png)
 ## Motivation
 My objectives was to create an application load balancer and attach that to three Amazon EC2 instances hosted in three different availability zones in a region using **Terraform and GitHub Actions.**
@@ -8,7 +9,7 @@ I discussed the concept in detail in my notes at -[CI-CD with Terraform and GitH
 *Note: I did not include the concepts of creating the EC2 instances, or installing a certificate, or route53 in this note.*
 
 ## Prerequisites
-I created an OpenID connect identity provider in Amazon Identity and Access Management that has a trust relationship with this GitHub repository. You can read about it [here](https://skundunotes.com/2023/02/28/securely-integrate-aws-credentials-with-github-actions-using-openid-connect/) to get a detailed explanation with steps.
+For this code to function without errors, I created an OpenID connect identity provider in Amazon Identity and Access Management that has a trust relationship with this GitHub repository. You can read about it [here](https://skundunotes.com/2023/02/28/securely-integrate-aws-credentials-with-github-actions-using-openid-connect/) to get a detailed explanation with steps.
 <br />I stored the `ARN` of the `IAM Role` as a GitHub secret which is referred in the `terraform.yml` file.
 ## Usage
 Ensure that the policy attached to the IAM role whose credentials are being used in this configuration has permission to create and manage all the resources that are included in this repository.
