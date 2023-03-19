@@ -10,7 +10,7 @@ I discussed the concept in detail in my notes at -[CI-CD with Terraform and GitH
 
 ## Prerequisites
 For this code to function without errors, I created an OpenID connect identity provider in Amazon Identity and Access Management that has a trust relationship with this GitHub repository. You can read about it [here](https://skundunotes.com/2023/02/28/securely-integrate-aws-credentials-with-github-actions-using-openid-connect/) to get a detailed explanation with steps.
-<br />I stored the `ARN` of the `IAM Role` as a GitHub secret which is referred in the `terraform.yml` file.
+<br />I stored the `ARN` of the `IAM Role` as a GitHub secret which is referred in the [`terraform.yml`](https://github.com/kunduso/add-aws-elb-ec2-terraform/blob/9fa61ad4792c73f233eb1dccb61c477c957d4cdb/.github/workflows/terraform.yml#L33-L38) file.
 ## Usage
 Ensure that the policy attached to the IAM role whose credentials are being used in this configuration has permission to create and manage all the resources that are included in this repository.
 <br />
