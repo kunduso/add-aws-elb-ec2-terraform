@@ -3,13 +3,11 @@ name: terraform-infra-provisioning
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "add-eip" ]
+    branches: [ '*' ]
   pull_request:
+    branches: ["main"]
 
-
-permissions:
-  id-token: write
-  contents: read
+permissions: read-all
 
 jobs:
   terraform:
@@ -17,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     permissions:
-      pull-requests: write
-      id-token: write
       contents: read
+      id-token: write
+      pull-requests: write
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
