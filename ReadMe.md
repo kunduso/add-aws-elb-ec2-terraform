@@ -1,5 +1,6 @@
 [![terraform-infra-provisioning](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml/badge.svg)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/terraform.yml) 
 [![checkov-static-analysis-scan](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml/badge.svg?branch=main)](https://github.com/kunduso/add-aws-elb-ec2-terraform/actions/workflows/code-scan.yml)
+[![infracost](https://img.shields.io/endpoint?url=https://dashboard.api.infracost.io/shields/json/06af6e89-01e0-4bb5-bf85-ea19a0d3327a/repos/d7b4f62a-ed9e-4c0e-86f1-0ef3eb090cfb/branch/e9ba2997-4ca7-4a8e-9db5-8cde6e98f7fa)](https://dashboard.infracost.io/org/skundudev/repos/d7b4f62a-ed9e-4c0e-86f1-0ef3eb090cfb?tab=settings)
 ![Image](https://skdevops.files.wordpress.com/2023/03/72-image-1.png)
 ## Motivation
 My objectives was to create an application load balancer and attach that to three Amazon EC2 instances hosted in three different availability zones in a region using **Terraform and GitHub Actions.**
