@@ -90,6 +90,7 @@ jobs:
                                     --repo=$GITHUB_REPOSITORY \
                                     --github-token=${{github.token}} \
                                     --pull-request=${{github.event.pull_request.number}} \
+                                    --show-skipped \
                                     --behavior=update
 
     - name: Post Terraform Plan output
