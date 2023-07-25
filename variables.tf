@@ -19,14 +19,14 @@ variable "secret_key" {
   default     = ""
 }
 
-variable "subnet_cidr_private" {
-  description = "cidr blocks for the private subnets"
+variable "subnet_cidr_public" {
+  description = "cidr blocks for the public subnets"
   default     = ["10.20.20.0/28", "10.20.20.16/28", "10.20.20.32/28"]
   type        = list(any)
 }
 
 variable "availability_zone" {
-  description = "availability zones for the private subnets"
+  description = "availability zones for the public subnets"
   default     = ["us-east-2a", "us-east-2b", "us-east-2c"]
   type        = list(any)
 }

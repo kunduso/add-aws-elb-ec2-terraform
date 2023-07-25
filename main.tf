@@ -9,13 +9,13 @@ resource "aws_vpc" "this" {
     "Name" = "Application-1"
   }
 }
-resource "aws_subnet" "private" {
-  count             = length(var.subnet_cidr_private)
+resource "aws_subnet" "public" {
+  count             = length(var.subnet_cidr_public)
   vpc_id            = aws_vpc.this.id
-  cidr_block        = var.subnet_cidr_private[count.index]
+  cidr_block        = var.subnet_cidr_public[count.index]
   availability_zone = var.availability_zone[count.index]
   tags = {
-    "Name" = "Application-1-private"
+    "Name" = "Application-1-public"
   }
 }
 resource "aws_route_table" "this-rt" {
@@ -24,9 +24,9 @@ resource "aws_route_table" "this-rt" {
     "Name" = "Application-1-route-table"
   }
 }
-resource "aws_route_table_association" "private" {
-  count          = length(var.subnet_cidr_private)
-  subnet_id      = element(aws_subnet.private.*.id, count.index)
+resource "aws_route_table_association" "public" {
+  count          = length(var.subnet_cidr_public)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.this-rt.id
 }
 resource "aws_internet_gateway" "this-igw" {
