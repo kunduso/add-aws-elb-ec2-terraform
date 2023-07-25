@@ -6,7 +6,7 @@ resource "aws_vpc" "this" {
   # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc#enable_dns_hostnames
   enable_dns_hostnames = true
   tags = {
-    "Name" = "Application-1"
+    "Name" = "app-1"
   }
 }
 resource "aws_subnet" "public" {
@@ -15,13 +15,13 @@ resource "aws_subnet" "public" {
   cidr_block        = var.subnet_cidr_public[count.index]
   availability_zone = var.availability_zone[count.index]
   tags = {
-    "Name" = "Application-1-public"
+    "Name" = "app-1-public-${count.index + 1}"
   }
 }
 resource "aws_route_table" "this-rt" {
   vpc_id = aws_vpc.this.id
   tags = {
-    "Name" = "Application-1-route-table"
+    "Name" = "app-1-route-table"
   }
 }
 resource "aws_route_table_association" "public" {
@@ -32,7 +32,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_internet_gateway" "this-igw" {
   vpc_id = aws_vpc.this.id
   tags = {
-    "Name" = "Application-1-gateway"
+    "Name" = "app-1-gateway"
   }
 }
 resource "aws_route" "internet-route" {
