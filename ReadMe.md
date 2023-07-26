@@ -5,9 +5,10 @@
 ## Motivation
 My objectives was to create an application load balancer and attach that to three Amazon EC2 instances hosted in three different availability zones in a region using **Terraform and GitHub Actions.**
 
-I discussed the concept in detail in my notes at -[CI-CD with Terraform and GitHub Actions to deploy to AWS.](https://skundunotes.com/2023/03/07/ci-cd-with-terraform-and-github-actions-to-deploy-to-aws/)
+<br />I discussed the concept in detail in my notes at -[CI-CD with Terraform and GitHub Actions to deploy to AWS.](https://skundunotes.com/2023/03/07/ci-cd-with-terraform-and-github-actions-to-deploy-to-aws/)
+<br />If you are interested in learning about how to create an external application load balancer with Amazon EC2 instances in a private subnet, check out the code in this repository: [add-aws-elb-ec2-private-subnet-terraform](https://github.com/kunduso/add-aws-elb-ec2-private-subnet-terraform)
 
-*Note: I did not include the concepts of creating the EC2 instances, or installing a certificate, or route53 in this note.*
+<br />*Note: I did not include the concepts of creating the EC2 instances, or installing a certificate, or route53 in this note.*
 
 ## Prerequisites
 For this code to function without errors, I created an OpenID connect identity provider in Amazon Identity and Access Management that has a trust relationship with this GitHub repository. You can read about it [here](https://skundunotes.com/2023/02/28/securely-integrate-aws-credentials-with-github-actions-using-openid-connect/) to get a detailed explanation with steps.
