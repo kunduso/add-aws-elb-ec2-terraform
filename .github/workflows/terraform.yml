@@ -77,12 +77,6 @@ jobs:
                         --format=json \
                         --out-file=/tmp/infracost.json
 
-    # Generate an Infracost breakdown.
-    - name: Generate Infracost breakdown
-      if: github.event_name == 'pull_request'
-      run: |
-        infracost breakdown --path=. --show-skipped
-
     - name: Post Infracost estimate
       if: github.event_name == 'pull_request'
       run: |
