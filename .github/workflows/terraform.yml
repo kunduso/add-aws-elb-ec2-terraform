@@ -12,7 +12,11 @@ on:
       - '**/README.md'
 
 permissions: read-all
-
+#--------------------------
+#
+# PLEASE READ: Add a GitHub Actions variable 'INFRACOST_SCAN_TYPE' and set the value to either 'hcl_code' or 'tf_plan' depending on what type of Infracost scan desired.
+#
+#--------------------------
 jobs:
   terraform:
     name: 'continuous-integration'
@@ -51,6 +55,35 @@ jobs:
         api-key: ${{ secrets.INFRACOST_API_KEY }}
       if: github.event_name == 'pull_request'
 
+      # Checkout the base branch of the pull request (e.g. main/master).
+    - name: Checkout base branch
+      if: ${{ (github.event_name == 'pull_request') && (vars.INFRACOST_SCAN_TYPE  == 'hcl_code') }}
+      uses: actions/checkout@v3
+      with:
+        ref: '${{ github.event.pull_request.base.ref }}'
+      
+    # Generate Infracost JSON file as the baseline.
+    - name: Generate Infracost cost estimate baseline
+      if: ${{ (github.event_name == 'pull_request') && (vars.INFRACOST_SCAN_TYPE  == 'hcl_code') }}
+      run: |
+        infracost breakdown --path=. \
+                            --format=json \
+                            --out-file=/tmp/infracost-base.json
+
+    # Checkout the current PR branch so we can create a diff.
+    - name: Checkout PR branch
+      if: ${{ (github.event_name == 'pull_request') && (vars.INFRACOST_SCAN_TYPE  == 'hcl_code') }}
+      uses: actions/checkout@v3
+
+    # Generate an Infracost diff and save it to a JSON file.
+    - name: Generate Infracost diff
+      if: ${{ (github.event_name == 'pull_request') && (vars.INFRACOST_SCAN_TYPE  == 'hcl_code') }}
+      run: |
+        infracost diff --path=. \
+                        --format=json \
+                        --compare-to=/tmp/infracost-base.json \
+                        --out-file=/tmp/infracost.json
+  
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
@@ -75,7 +108,7 @@ jobs:
 
     # Generate an Infracost diff and save it to a JSON file.
     - name: Generate Infracost diff
-      if: github.event_name == 'pull_request'
+      if:  ${{ (github.event_name == 'pull_request') && (vars.INFRACOST_SCAN_TYPE  == 'tf_plan') }}
       run: |
         infracost diff --path=TFplan.JSON \
                         --format=json \
