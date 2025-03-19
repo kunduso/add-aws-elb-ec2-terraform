@@ -1,18 +1,4 @@
-resource "aws_default_security_group" "default" {
-  vpc_id = aws_vpc.this.id
-  ingress {
-    protocol  = -1
-    self      = true
-    from_port = 0
-    to_port   = 0
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 resource "aws_security_group" "ec2_instance" {
   name        = "IN-SG"
   description = "Allow inbound and outbound traffic to EC2 instances from load balancer security group"
@@ -28,9 +14,10 @@ resource "aws_security_group" "ec2_instance" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = aws_vpc.this.id
+  vpc_id = module.vpc.vpc.id
 }
 
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 resource "aws_security_group" "lb" {
   name        = "LB-SG"
   description = "Allow inbound and outbound traffic to load balancer from the internet."
@@ -46,5 +33,5 @@ resource "aws_security_group" "lb" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  vpc_id = aws_vpc.this.id
+  vpc_id = module.vpc.vpc.id
 }
