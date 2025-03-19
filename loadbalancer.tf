@@ -3,7 +3,7 @@ resource "aws_lb_target_group" "front" {
   name     = "application-front"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.this.id
+  vpc_id   = module.vpc.vpc.id
   health_check {
     enabled             = true
     healthy_threshold   = 3
@@ -40,8 +40,12 @@ resource "aws_lb" "front" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb.id]
-  subnets            = [for subnet in aws_subnet.public : subnet.id]
-
+  subnets            = [for subnet in module.vpc.public_subnets : subnet.id]
+  access_logs {
+    bucket  = aws_s3_bucket.artifacts.id
+    enabled = true
+  }
+  depends_on                 = [aws_s3_bucket_policy.alb_logs]
   enable_deletion_protection = false
 
   tags = {
