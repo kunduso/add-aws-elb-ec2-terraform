@@ -26,6 +26,11 @@ resource "aws_instance" "app-server" {
     http_put_response_hop_limit = 1
     instance_metadata_tags      = "enabled"
   }
+  ebs_optimized = true
+  monitoring    = true
+  root_block_device {
+    encrypted = true
+  }
   tags = {
     Name = "app-server-${count.index + 1}"
   }
