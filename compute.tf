@@ -1,29 +1,8 @@
-# resource "aws_security_group" "http-sg" {
-#   name        = "allow_http_access"
-#   description = "allow inbound http traffic"
-#   vpc_id      = aws_vpc.this.id
-
-#   ingress {
-#     description = "from my ip range"
-#     from_port   = "80"
-#     to_port     = "80"
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-#   egress {
-#     cidr_blocks = ["0.0.0.0/0"]
-#     from_port   = "0"
-#     protocol    = "-1"
-#     to_port     = "0"
-#   }
-#   tags = {
-#     "Name" = "Application-1-sg"
-#   }
-# }
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 data "aws_ami" "amazon_ami" {
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-2.0.20220606.1-x86_64-gp2"]
+    values = var.ami_name
   }
   filter {
     name   = "virtualization-type"
@@ -32,6 +11,7 @@ data "aws_ami" "amazon_ami" {
   most_recent = true
   owners      = ["amazon"]
 }
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 resource "aws_instance" "app-server" {
   count                  = length(var.subnet_cidr_public)
   instance_type          = "t2.micro"

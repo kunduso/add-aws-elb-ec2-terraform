@@ -23,6 +23,11 @@ variable "name" {
   type        = string
   default     = "app-1"
 }
+variable "ami_name" {
+  description = "The ami name of the image from where the instances will be created"
+  default     = ["amzn2-ami-amd-hvm-2.0.20250220.0-x86_64-gp2"]
+  type        = list(string)
+}
 variable "vpc_cidr" {
   description = "the vpc cidr"
   default     = "10.20.20.0/26"
